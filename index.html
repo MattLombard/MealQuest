@@ -12,14 +12,20 @@
     <header>
       <nav class="blue-grey lighten-2">
         <div class="nav-wrapper">
-          <p class="brand-logo">MealQuest</p>
+          <h1 class="ml-4 text-5xl">MealQuest</h1>
         </div>
       </nav>
     </header>
-    <main>
+    <main class="m-10">
       <div class="flex flex-row">
         <div id="search-history" class="basis-4/12">
-          <input placeholder="Search Here" />
+          <h3>Search</h3>
+          <input
+            id="search-bar"
+            class="p-2 border-2 border-gray-500"
+            placeholder="Search Here"
+          />
+          <button id="search-button" class="p-2 bg-gray-300">Search</button>
         </div>
 
         <div id="search-results" class="basis-8/12">
