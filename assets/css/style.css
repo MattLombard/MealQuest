@@ -1,1 +1,44 @@
 
+
+/* Set the background color of the body to white */
+body {
+    background-color: #fff;
+  }
+  
+  /* Style the header */
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+  }
+  
+  /* Style the navigation bar */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Style the brand logo */
+  .brand-logo {
+    font-size: 1.5rem;
+    margin: 0 1rem;
+  }
+  
+  /* Style the links in the navigation bar */
+  .nav-wrapper a {
+    color: #fff;
+    margin: 0 0.5rem;
+  }
+  
+  /* Style the links on hover */
+  .nav-wrapper a:hover {
+    text-decoration: none;
+    color: #ffd700;
+  }
+  
+  /* Style the script tags */
+  script {
+    display: none;
+  }
+  
