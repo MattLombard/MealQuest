@@ -46,7 +46,6 @@ var handleSearch = (event) => {
     .then((data) => {
       const randomNumber = Math.floor(Math.random() * data.meals.length);
       const randomMeal = data.meals[randomNumber];
-      console.log(randomMeal);
 
       // After getting a random meal id, get more information on the meal
       const mealByIdUrl = baseMealDbApi + 'lookup.php?i=' + randomMeal.idMeal;
@@ -57,23 +56,56 @@ var handleSearch = (event) => {
 
 var mealToHTML = (meal) => {
   meal = meal.meals[0];
-
   // Make elements to put on HTML
   var outerDiv = $('<div>').addClass('flex flex-row flex-wrap');
-  var imgDiv = $('<div>').addClass('basis-full md:basis-1/2 max-h-sm max-w-sm p-4');
-  var mealImg = $('<img>').attr('src', meal.strMealThumb);
-  imgDiv.append(mealImg);
 
+  // Column 1: Title/Instructions
   var titleInstructionDiv = $('<div>').addClass('basis-full md:basis-1/2 p-4');
   var title = $('<h3>').text(meal.strMeal).addClass('text-2xl');
   var instructions = $('<p>').text(meal.strInstructions).addClass('mt-5');
+  titleInstructionDiv.append(title, instructions);
+
+  // Column 2: Image
+  var imgDiv = $('<div>').addClass('basis-full md:basis-1/2 p-4');
+  var mealImg = $('<img>').attr('src', meal.strMealThumb);
+  imgDiv.append(mealImg);
+
+  // Column 3: Ingredients
+  var ingredientsObject = mealIngredientsToObject(meal);
+  var ingredientsDiv = $('<div>').addClass('basis-full p-4');
+  var ingredientsHeader = $('<h4>').addClass('text-xl mb-2').text('Ingredients');
+  var ingredientsUl = $('<ul>');
+  ingredientsDiv.append(ingredientsHeader, ingredientsUl);
+  // Make an li for each ingredient
+  var ingredientArray = Object.keys(ingredientsObject);
+  for (let i = 0; i < ingredientArray.length; i++) {
+    const ingredientLi = $('<li>');
+    const ingredient = ingredientArray[i];
+    ingredientLi.text(`${ingredient}: ${ingredientsObject[ingredient].toLowerCase()}`);
+    ingredientsUl.append(ingredientLi);
+  }
 
   // Clear the results
   $('#search-results').text('');
   // Append elements to HTML
   $('#search-results').append(outerDiv);
-  outerDiv.append(imgDiv, titleInstructionDiv);
-  titleInstructionDiv.append(title, instructions);
+  outerDiv.append(titleInstructionDiv, imgDiv, ingredientsDiv);
+};
+
+var mealIngredientsToObject = (meal) => {
+  var toReturn = {};
+  const ingredientBase = 'strIngredient';
+  const measureBase = 'strMeasure';
+  for (let i = 1; i <= 20; i++) {
+    let currentIngredient = ingredientBase + i;
+    let currentMeasure = measureBase + i;
+    if (meal[currentIngredient] && meal[currentMeasure]) {
+      toReturn[meal[currentIngredient]] = meal[currentMeasure];
+    } else {
+      break;
+    }
+  }
+  return toReturn;
 };
 
 // Event handlers
