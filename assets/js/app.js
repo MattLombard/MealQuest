@@ -54,8 +54,22 @@ var handleSearch = (event) => {
     .catch(console.log);
 };
 
+var saveMeal = (mealid, mealname) => {
+  var mealhistory = localStorage.getItem("mealHistory")
+  if(!mealhistory) {
+    mealhistory = {
+  
+    }
+  }else {
+    mealhistory = JSON.parse(mealhistory)
+  }
+  mealhistory[mealid]=mealname
+localStorage.setItem("mealHistory", JSON.stringify(mealhistory))
+}
+
 var mealToHTML = (meal) => {
   meal = meal.meals[0];
+  saveMeal(meal.idMeal, meal.strMeal)
   // Make elements to put on HTML
   var outerDiv = $('<div>').addClass('flex flex-row flex-wrap');
 
