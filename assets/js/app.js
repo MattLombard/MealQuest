@@ -41,7 +41,12 @@ var handleSearch = (event) => {
 
   var apiURL = baseMealDbApi + "filter.php?i=" + searchBar;
 
-  fetch(apiURL).then(toJSON).then(console.log);
+  fetch(apiURL)
+    .then(toJSON)
+    .then((data) => {
+      const randomNumber = Math.floor(Math.random() * data.meals.length);
+      console.log(data.meals[randomNumber]);
+    });
 };
 
 $("#search-form").on("submit", handleSearch);
