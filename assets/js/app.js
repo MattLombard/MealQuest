@@ -59,14 +59,21 @@ var mealToHTML = (meal) => {
   meal = meal.meals[0];
 
   // Make elements to put on HTML
-  var title = $('<h3>').text(meal.strMeal);
+  var outerDiv = $('<div>').addClass('flex flex-row flex-wrap');
+  var imgDiv = $('<div>').addClass('basis-full md:basis-1/2 max-h-sm max-w-sm p-4');
   var mealImg = $('<img>').attr('src', meal.strMealThumb);
-  var instructions = $('<p>').text(meal.strInstructions);
+  imgDiv.append(mealImg);
+
+  var titleInstructionDiv = $('<div>').addClass('basis-full md:basis-1/2 p-4');
+  var title = $('<h3>').text(meal.strMeal).addClass('text-2xl');
+  var instructions = $('<p>').text(meal.strInstructions).addClass('mt-5');
 
   // Clear the results
   $('#search-results').text('');
   // Append elements to HTML
-  $('#search-results').append(title, mealImg, instructions);
+  $('#search-results').append(outerDiv);
+  outerDiv.append(imgDiv, titleInstructionDiv);
+  titleInstructionDiv.append(title, instructions);
 };
 
 // Event handlers
