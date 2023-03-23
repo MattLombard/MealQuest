@@ -54,22 +54,38 @@ var handleSearch = (event) => {
     .catch(console.log);
 };
 
-var saveMeal = (mealid, mealname) => {
-  var mealhistory = localStorage.getItem("mealHistory")
-  if(!mealhistory) {
-    mealhistory = {
-  
-    }
-  }else {
-    mealhistory = JSON.parse(mealhistory)
+var displayhistory = () => {
+  $('#history-ul').text('');
+  var mealhistory = localStorage.getItem('mealHistory');
+  if (!mealhistory) {
+    return;
+  } else {
+    mealhistory = JSON.parse(mealhistory);
   }
-  mealhistory[mealid]=mealname
-localStorage.setItem("mealHistory", JSON.stringify(mealhistory))
-}
+  console.log($('#history-ul'));
+  for (const mealid in mealhistory) {
+    console.log(mealid);
+    var mealli = $('<li>').text(mealhistory[mealid]);
+    console.log(mealli);
+    $('#history-ul').append(mealli);
+  }
+};
+
+var saveMeal = (mealid, mealname) => {
+  var mealhistory = localStorage.getItem('mealHistory');
+  if (!mealhistory) {
+    mealhistory = {};
+  } else {
+    mealhistory = JSON.parse(mealhistory);
+  }
+  mealhistory[mealid] = mealname;
+  localStorage.setItem('mealHistory', JSON.stringify(mealhistory));
+  displayhistory();
+};
 
 var mealToHTML = (meal) => {
   meal = meal.meals[0];
-  saveMeal(meal.idMeal, meal.strMeal)
+  saveMeal(meal.idMeal, meal.strMeal);
   // Make elements to put on HTML
   var outerDiv = $('<div>').addClass('flex flex-row flex-wrap');
 
