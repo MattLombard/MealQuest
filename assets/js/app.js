@@ -62,11 +62,12 @@ var displayhistory = () => {
   } else {
     mealhistory = JSON.parse(mealhistory);
   }
-  console.log($('#history-ul'));
   for (const mealid in mealhistory) {
-    console.log(mealid);
     var mealli = $('<li>').text(mealhistory[mealid]);
-    console.log(mealli);
+    mealli.click(() => {
+      var mealidurl = baseMealDbApi + 'lookup.php?i=' + mealid;
+      fetch(mealidurl).then(toJSON).then(mealToHTML).catch(console.log);
+    });
     $('#history-ul').append(mealli);
   }
 };
