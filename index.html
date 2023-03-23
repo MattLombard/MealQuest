@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
     <title>MealQuest</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="assets/css/style.css" />
@@ -21,12 +27,17 @@
         <div id="search-history" class="basis-full md:basis-1/4">
           <div class="bg-gray-300 rounded p-5 sticky top-5">
             <form id="search-form">
-              <label class="block mb-2">Search</label>
-              <input id="search-bar" class="block p-2 border-2 border-gray-300" placeholder="chicken" />
-              <button id="search-button" class="p-2 bg-blue-300 mt-2">Search</button>
+              <label class="block mb-2">Search by ingredient</label>
+              <input id="search-bar" class="block p-2 border-2 border-gray-300" placeholder="Ex: Chicken, Eggs, etc" />
+              <button id="search-button" class="p-2 hover:bg-blue-400 bg-blue-300 mt-2">Search</button>
             </form>
             <div class="border-t-2 mt-2" id="history-list">
-              <h2 class="mt-2 text-center">History</h2>
+              <div class="w-3/5 mx-auto text-center mb-2">
+                <h2 class="mt-2 text-center text-xl inline-block">History</h2>
+                <button id="history-clear" class="hover:bg-red-500 bg-red-400 p-2 rounded">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
               <ul id="history-ul"></ul>
             </div>
           </div>
