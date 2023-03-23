@@ -58,7 +58,7 @@ var displayhistory = () => {
   }
   for (const mealid in mealhistory) {
     var mealli = $('<li>').addClass('w-4/5 mx-auto');
-    var mealButton = $('<button>').text(mealhistory[mealid]).addClass('p-2 rounded bg-blue-300 m-1 w-full');
+    var mealButton = $('<button>').text(mealhistory[mealid]).addClass('p-2 rounded hover:bg-blue-400 bg-blue-300 m-1 w-full');
     mealButton.click(() => {
       var mealidurl = baseMealDbApi + 'lookup.php?i=' + mealid;
       fetch(mealidurl).then(toJSON).then(mealToHTML).catch(console.log);
@@ -112,20 +112,23 @@ var mealToHTML = (meal) => {
     ingredientsUl.append(ingredientLi);
   }
   // Column 4 YT
-  var youtubeDiv = $('<div>');
-  // var youtubeURL = createYoutubeSearch(meal.strMeal);
-  // fetch(youtubeURL)
-  //   .then(toJSON)
-  //   .then((data) => {
-  //     for (let videoObject of data.items) {
-  //       var youtubeIframe = $('<iframe>');
-  //       const videoId = videoObject.id.videoId;
-  //       youtubeIframe.attr('src', 'https://www.youtube.com/embed/' + videoId);
-  //       youtubeIframe.attr('allowfullscreen', 'true');
-  //       youtubeDiv.append(youtubeIframe);
-  //     }
-  //     console.log(data);
-  //   });
+  var youtubeDiv = $('<div>').addClass('basis-full p-4 flex flex-row flex-wrap gap-5');
+  var youtubeHeader = $('<h4>').text(`YouTube videos about ${meal.strMeal}`);
+  youtubeHeader.addClass('basis-full text-xl border-t-4 pt-2 border-gray-600');
+  youtubeDiv.append(youtubeHeader);
+  var youtubeURL = createYoutubeSearch(meal.strMeal);
+  fetch(youtubeURL)
+    .then(toJSON)
+    .then((data) => {
+      for (let videoObject of data.items) {
+        var youtubeIframe = $('<iframe>');
+        const videoId = videoObject.id.videoId;
+        youtubeIframe.attr('src', 'https://www.youtube.com/embed/' + videoId);
+        youtubeIframe.attr('allowfullscreen', 'true');
+        youtubeDiv.append(youtubeIframe);
+      }
+      console.log(data);
+    });
   // Clear the results
   $('#search-results').text('');
   // Append elements to HTML
