@@ -149,8 +149,14 @@ var mealIngredientsToObject = (meal) => {
   return toReturn;
 };
 
+const clearHistory = () => {
+  localStorage.removeItem('mealHistory');
+  displayhistory();
+};
+
 // Event handlers
 $('#search-form').on('submit', handleSearch);
+$('#history-clear').click(clearHistory);
 
 // On page load
 $(() => {
