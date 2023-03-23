@@ -21,12 +21,7 @@ const toJSON = (response) => {
 
 // Function that fetches a random meal
 const getRandomMeal = () => {
-  fetch(mealDbApiRandom)
-    .then(toJSON)
-    .then((data) => {
-      // TODO: Populate the HTML page with the random meal
-    })
-    .catch(console.log);
+  fetch(mealDbApiRandom).then(toJSON).then(mealToHTML).catch(console.log);
 };
 
 var handleSearch = (event) => {
@@ -156,3 +151,10 @@ var mealIngredientsToObject = (meal) => {
 
 // Event handlers
 $('#search-form').on('submit', handleSearch);
+
+// On page load
+$(() => {
+  // Show the history on page load and get random meal
+  getRandomMeal();
+  displayhistory();
+});
