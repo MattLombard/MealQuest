@@ -62,12 +62,14 @@ var displayhistory = () => {
     mealhistory = JSON.parse(mealhistory);
   }
   for (const mealid in mealhistory) {
-    var mealli = $('<li>').text(mealhistory[mealid]);
-    mealli.click(() => {
+    var mealli = $('<li>').addClass('w-4/5 mx-auto');
+    var mealButton = $('<button>').text(mealhistory[mealid]).addClass('p-2 rounded bg-blue-300 m-1 w-full');
+    mealButton.click(() => {
       var mealidurl = baseMealDbApi + 'lookup.php?i=' + mealid;
       fetch(mealidurl).then(toJSON).then(mealToHTML).catch(console.log);
     });
     $('#history-ul').append(mealli);
+    mealli.append(mealButton);
   }
 };
 
@@ -116,19 +118,19 @@ var mealToHTML = (meal) => {
   }
   // Column 4 YT
   var youtubeDiv = $('<div>');
-  var youtubeURL = createYoutubeSearch(meal.strMeal);
-  fetch(youtubeURL)
-    .then(toJSON)
-    .then((data) => {
-      for (let videoObject of data.items) {
-        var youtubeIframe = $('<iframe>');
-        const videoId = videoObject.id.videoId;
-        youtubeIframe.attr('src', 'https://www.youtube.com/embed/' + videoId);
-        youtubeIframe.attr('allowfullscreen', 'true');
-        youtubeDiv.append(youtubeIframe);
-      }
-      console.log(data);
-    });
+  // var youtubeURL = createYoutubeSearch(meal.strMeal);
+  // fetch(youtubeURL)
+  //   .then(toJSON)
+  //   .then((data) => {
+  //     for (let videoObject of data.items) {
+  //       var youtubeIframe = $('<iframe>');
+  //       const videoId = videoObject.id.videoId;
+  //       youtubeIframe.attr('src', 'https://www.youtube.com/embed/' + videoId);
+  //       youtubeIframe.attr('allowfullscreen', 'true');
+  //       youtubeDiv.append(youtubeIframe);
+  //     }
+  //     console.log(data);
+  //   });
   // Clear the results
   $('#search-results').text('');
   // Append elements to HTML
