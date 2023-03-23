@@ -40,7 +40,6 @@ var handleSearch = (event) => {
   }
 
   var apiURL = baseMealDbApi + 'filter.php?i=' + searchBar;
-
   fetch(apiURL)
     .then(toJSON)
     .then((data) => {
@@ -54,8 +53,39 @@ var handleSearch = (event) => {
     .catch(console.log);
 };
 
+var displayhistory = () => {
+  $('#history-ul').text('');
+  var mealhistory = localStorage.getItem('mealHistory');
+  if (!mealhistory) {
+    return;
+  } else {
+    mealhistory = JSON.parse(mealhistory);
+  }
+  for (const mealid in mealhistory) {
+    var mealli = $('<li>').text(mealhistory[mealid]);
+    mealli.click(() => {
+      var mealidurl = baseMealDbApi + 'lookup.php?i=' + mealid;
+      fetch(mealidurl).then(toJSON).then(mealToHTML).catch(console.log);
+    });
+    $('#history-ul').append(mealli);
+  }
+};
+
+var saveMeal = (mealid, mealname) => {
+  var mealhistory = localStorage.getItem('mealHistory');
+  if (!mealhistory) {
+    mealhistory = {};
+  } else {
+    mealhistory = JSON.parse(mealhistory);
+  }
+  mealhistory[mealid] = mealname;
+  localStorage.setItem('mealHistory', JSON.stringify(mealhistory));
+  displayhistory();
+};
+
 var mealToHTML = (meal) => {
   meal = meal.meals[0];
+  saveMeal(meal.idMeal, meal.strMeal);
   // Make elements to put on HTML
   var outerDiv = $('<div>').addClass('flex flex-row flex-wrap');
 
