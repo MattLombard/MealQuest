@@ -40,7 +40,6 @@ var handleSearch = (event) => {
   }
 
   var apiURL = baseMealDbApi + 'filter.php?i=' + searchBar;
-
   fetch(apiURL)
     .then(toJSON)
     .then((data) => {
