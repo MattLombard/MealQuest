@@ -18,15 +18,17 @@
     </header>
     <main class="m-10">
       <div class="flex flex-row gap-10 flex-wrap">
-        <div id="search-history" class="basis-full md:basis-1/4 bg-gray-300 rounded p-5">
-          <form id="search-form">
-            <label class="block mb-2">Search</label>
-            <input id="search-bar" class="block p-2 border-2 border-gray-500" placeholder="Search Here" />
-            <button id="search-button" class="p-2 bg-blue-200 mt-2">Search</button>
-          </form>
-          <div class="border-t-2 mt-2" id="history-list">
-            <h2 class="mt-2 text-center">History</h2>
-            <ul id="history-ul"></ul>
+        <div id="search-history" class="basis-full md:basis-1/4">
+          <div class="bg-gray-300 rounded p-5 sticky top-5">
+            <form id="search-form">
+              <label class="block mb-2">Search</label>
+              <input id="search-bar" class="block p-2 border-2 border-gray-300" placeholder="chicken" />
+              <button id="search-button" class="p-2 bg-blue-300 mt-2">Search</button>
+            </form>
+            <div class="border-t-2 mt-2" id="history-list">
+              <h2 class="mt-2 text-center">History</h2>
+              <ul id="history-ul"></ul>
+            </div>
           </div>
         </div>
 

@@ -8,7 +8,7 @@ const createIngredientSearch = (ingredient) => {
 
 // Base URL for the YouTube Data API: https://developers.google.com/youtube/v3/getting-started
 const baseYoutubeApi = 'https://youtube.googleapis.com/youtube/v3/';
-const youtubeApiKey = 'AIzaSyDcBbcACogqb1GyrMj1M7qNN4B-W9CLhhA';
+const youtubeApiKey = 'AIzaSyBHBGlan35SJCnaKo6_4TdLPObUAbrEcNg';
 const createYoutubeSearch = (query) => {
   // Example: https://youtube.googleapis.com/youtube/v3/search?maxResults=5&q=${query}&key=AIzaSyDcBbcACogqb1GyrMj1M7qNN4B-W9CLhhA
   return `${baseYoutubeApi}search?maxResults=5&q=${query}&key=${youtubeApiKey}`;
@@ -62,12 +62,14 @@ var displayhistory = () => {
     mealhistory = JSON.parse(mealhistory);
   }
   for (const mealid in mealhistory) {
-    var mealli = $('<li>').text(mealhistory[mealid]);
-    mealli.click(() => {
+    var mealli = $('<li>').addClass('w-4/5 mx-auto');
+    var mealButton = $('<button>').text(mealhistory[mealid]).addClass('p-2 rounded bg-blue-300 m-1 w-full');
+    mealButton.click(() => {
       var mealidurl = baseMealDbApi + 'lookup.php?i=' + mealid;
       fetch(mealidurl).then(toJSON).then(mealToHTML).catch(console.log);
     });
     $('#history-ul').append(mealli);
+    mealli.append(mealButton);
   }
 };
 
@@ -114,12 +116,26 @@ var mealToHTML = (meal) => {
     ingredientLi.text(`${ingredient}: ${ingredientsObject[ingredient].toLowerCase()}`);
     ingredientsUl.append(ingredientLi);
   }
-
+  // Column 4 YT
+  var youtubeDiv = $('<div>');
+  // var youtubeURL = createYoutubeSearch(meal.strMeal);
+  // fetch(youtubeURL)
+  //   .then(toJSON)
+  //   .then((data) => {
+  //     for (let videoObject of data.items) {
+  //       var youtubeIframe = $('<iframe>');
+  //       const videoId = videoObject.id.videoId;
+  //       youtubeIframe.attr('src', 'https://www.youtube.com/embed/' + videoId);
+  //       youtubeIframe.attr('allowfullscreen', 'true');
+  //       youtubeDiv.append(youtubeIframe);
+  //     }
+  //     console.log(data);
+  //   });
   // Clear the results
   $('#search-results').text('');
   // Append elements to HTML
   $('#search-results').append(outerDiv);
-  outerDiv.append(titleInstructionDiv, imgDiv, ingredientsDiv);
+  outerDiv.append(titleInstructionDiv, imgDiv, ingredientsDiv, youtubeDiv);
 };
 
 var mealIngredientsToObject = (meal) => {

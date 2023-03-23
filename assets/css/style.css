@@ -1,16 +1,11 @@
-
-
 /* Set the background color of the body to white */
- body {
-    background-color: #fff;
-  }
-  
-  /* Style the header */
-  header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-  }
-  
-  
- 
+body {
+  background-color: #fff;
+}
+
+/* Style the header */
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+}
