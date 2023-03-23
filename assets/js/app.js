@@ -8,7 +8,7 @@ const createIngredientSearch = (ingredient) => {
 
 // Base URL for the YouTube Data API: https://developers.google.com/youtube/v3/getting-started
 const baseYoutubeApi = 'https://youtube.googleapis.com/youtube/v3/';
-const youtubeApiKey = 'AIzaSyDcBbcACogqb1GyrMj1M7qNN4B-W9CLhhA';
+const youtubeApiKey = 'AIzaSyBHBGlan35SJCnaKo6_4TdLPObUAbrEcNg';
 const createYoutubeSearch = (query) => {
   // Example: https://youtube.googleapis.com/youtube/v3/search?maxResults=5&q=${query}&key=AIzaSyDcBbcACogqb1GyrMj1M7qNN4B-W9CLhhA
   return `${baseYoutubeApi}search?maxResults=5&q=${query}&key=${youtubeApiKey}`;
@@ -114,12 +114,26 @@ var mealToHTML = (meal) => {
     ingredientLi.text(`${ingredient}: ${ingredientsObject[ingredient].toLowerCase()}`);
     ingredientsUl.append(ingredientLi);
   }
-
+  // Column 4 YT
+  var youtubeDiv = $('<div>');
+  var youtubeURL = createYoutubeSearch(meal.strMeal);
+  fetch(youtubeURL)
+    .then(toJSON)
+    .then((data) => {
+      for (let videoObject of data.items) {
+        var youtubeIframe = $('<iframe>');
+        const videoId = videoObject.id.videoId;
+        youtubeIframe.attr('src', 'https://www.youtube.com/embed/' + videoId);
+        youtubeIframe.attr('allowfullscreen', 'true');
+        youtubeDiv.append(youtubeIframe);
+      }
+      console.log(data);
+    });
   // Clear the results
   $('#search-results').text('');
   // Append elements to HTML
   $('#search-results').append(outerDiv);
-  outerDiv.append(titleInstructionDiv, imgDiv, ingredientsDiv);
+  outerDiv.append(titleInstructionDiv, imgDiv, ingredientsDiv, youtubeDiv);
 };
 
 var mealIngredientsToObject = (meal) => {
