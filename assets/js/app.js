@@ -87,13 +87,13 @@ var mealToHTML = (meal) => {
   var outerDiv = $('<div>').addClass('flex flex-row flex-wrap');
 
   // Column 1: Title/Instructions
-  var titleInstructionDiv = $('<div>').addClass('basis-full md:basis-1/2 p-4');
+  var titleInstructionDiv = $('<div>').addClass('basis-full lg:basis-1/2 p-4');
   var title = $('<h3>').text(meal.strMeal).addClass('text-2xl');
   var instructions = $('<p>').text(meal.strInstructions).addClass('mt-5');
   titleInstructionDiv.append(title, instructions);
 
   // Column 2: Image
-  var imgDiv = $('<div>').addClass('basis-full md:basis-1/2 p-4');
+  var imgDiv = $('<div>').addClass('basis-full lg:basis-1/2 p-4');
   var mealImg = $('<img>').attr('src', meal.strMealThumb);
   imgDiv.append(mealImg);
 
@@ -127,7 +127,6 @@ var mealToHTML = (meal) => {
         youtubeIframe.attr('allowfullscreen', 'true');
         youtubeDiv.append(youtubeIframe);
       }
-      console.log(data);
     });
   // Clear the results
   $('#search-results').text('');
