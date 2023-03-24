@@ -22,15 +22,15 @@
         </div>
       </nav>
     </header>
-    <main class="m-10">
-      <div class="flex flex-row gap-10 flex-wrap">
+    <main class="m-2 md:m-10">
+      <div class="flex flex-row flex-wrap">
         <!-- Search and history column -->
-        <div id="search-history" class="basis-full md:basis-1/4">
-          <div class="bg-gray-300 rounded p-5 sticky top-5">
+        <div id="search-history" class="basis-full md:basis-1/4 p-2">
+          <div class="bg-gray-300 rounded p-3 sticky top-5">
             <form id="search-form">
               <label class="block mb-2">Search by ingredient</label>
-              <input id="search-bar" class="block p-2 border-2 border-gray-300 w-full" placeholder="Ex: Chicken, Eggs, etc" />
-              <button id="search-button" class="p-2 hover:bg-blue-400 bg-blue-300 mt-2">Search</button>
+              <input id="search-bar" class="block p-2 border-2 border-gray-300 w-full min-w-0" placeholder="Ex: Chicken, Eggs, etc" />
+              <button id="search-button" class="p-2 hover:bg-blue-400 bg-blue-300 rounded mt-2">Search</button>
             </form>
             <div class="border-t-2 mt-2" id="history-list">
               <div class="w-3/5 mx-auto text-center mb-2">
@@ -44,8 +44,10 @@
           </div>
         </div>
         <!-- Results column -->
-        <div id="search-results" class="basis-full md:basis-8/12 bg-gray-300 rounded p-5">
-          <h3>Results</h3>
+        <div class="basis-full md:basis-3/4 p-2">
+          <div id="search-results" class="bg-gray-300 rounded p-3">
+            <h3>Results</h3>
+          </div>
         </div>
       </div>
     </main>

@@ -112,7 +112,7 @@ var mealToHTML = (meal) => {
     ingredientsUl.append(ingredientLi);
   }
   // Column 4 YT
-  var youtubeDiv = $('<div>').addClass('basis-full p-4 flex flex-row flex-wrap gap-5');
+  var youtubeDiv = $('<div>').addClass('basis-full p-4 flex flex-row flex-wrap gap-5 justify-center');
   var youtubeHeader = $('<h4>').text(`YouTube videos about ${meal.strMeal}`);
   youtubeHeader.addClass('basis-full text-xl border-t-4 pt-2 border-gray-600');
   youtubeDiv.append(youtubeHeader);
@@ -125,6 +125,7 @@ var mealToHTML = (meal) => {
         const videoId = videoObject.id.videoId;
         youtubeIframe.attr('src', 'https://www.youtube.com/embed/' + videoId);
         youtubeIframe.attr('allowfullscreen', 'true');
+        youtubeIframe.addClass('w-60 md:w-60 lg:w-96 aspect-video');
         youtubeDiv.append(youtubeIframe);
       }
     });
